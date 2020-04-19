@@ -1,4 +1,4 @@
-# garmin-proj
+# Garmin-Proj
 
 ## Purpose
 Make a cool tool for accessing the garmin-connect data through a dashboard

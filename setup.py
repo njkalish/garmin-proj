@@ -3,7 +3,7 @@ from setuptools import setup
 install_requirements = [
         'click',
         'requests',
-        'python-garminconnect',
+        'garminconnect',
 ]
 
 setup(

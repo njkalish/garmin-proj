@@ -1,15 +1,18 @@
 from warnings import warn
 
 from click import confirm, echo
-from garminconnect import Garmin, GarminConnectConnectionError, \
-    GarminConnectTooManyRequestsError, GarminConnectAuthenticationError
+from garminconnect import (
+    Garmin,
+    GarminConnectConnectionError,
+    GarminConnectTooManyRequestsError,
+    GarminConnectAuthenticationError,
+)
 from requests import HTTPError
 
-from .auth import default_credentials, prompt_credentials, \
-    credential_file_path, create_credential_file
+from garminproj.auth import default_credentials, prompt_credentials, credential_file_path, create_credential_file
 
 
-def get_connect_session():
+def get_session():
     """
     General access point for getting an authenticated Garmin Connect session.
 

@@ -6,4 +6,5 @@ setup(
     packages=['garminproj',],
     license='MIT License',
     long_description=open('README.md').read(),
+    requires=['flask', 'werkzeug']
 )

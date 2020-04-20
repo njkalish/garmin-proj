@@ -1,4 +1,10 @@
-from distutils.core import setup
+from setuptools import setup
+
+install_requirements = [
+        'click',
+        'requests',
+        'python-garminconnect',
+]
 
 setup(
     name='Garmin-Proj',
@@ -6,4 +12,5 @@ setup(
     packages=['garminproj',],
     license='MIT License',
     long_description=open('README.md').read(),
+    install_requires=install_requirements
 )

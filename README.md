@@ -1,5 +1,6 @@
 # Garmin-Proj
 
+![Python application](https://github.com/njkalish/garmin-proj/workflows/Python%20application/badge.svg)
 ## Purpose
 Make a cool tool for accessing the garmin-connect data through a dashboard
 that will display interesting stats about... things.

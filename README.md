@@ -21,3 +21,8 @@ that will display interesting stats about... things.
 #### Code-writing Collaboration
 - Experiment with services such as CodeStream and GitHub for collaborating
 on a large tool. 
+
+## TODO
+- Dashboard in Bokeh or Dask
+- Ideas for plotting
+    - Overlays of multiple attempts like @likesroadbikes

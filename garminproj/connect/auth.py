@@ -2,7 +2,7 @@ from configparser import ConfigParser
 from getpass import getpass
 from pathlib import Path
 
-from . import config
+from garminproj import config
 
 credential_file_path = Path(config['User']['credential_file']).expanduser()
 

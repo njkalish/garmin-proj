@@ -5,7 +5,7 @@ from garminconnect import Garmin, GarminConnectConnectionError, \
     GarminConnectTooManyRequestsError, GarminConnectAuthenticationError
 from requests import HTTPError
 
-from .auth import default_credentials, prompt_credentials, \
+from garminproj.connect.auth import default_credentials, prompt_credentials, \
     credential_file_path, create_credential_file
 
 

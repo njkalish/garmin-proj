@@ -2,6 +2,7 @@ from io import BytesIO
 
 from requests import HTTPError
 
+from garminproj.utils.tcx import TCXFile
 from .login import garmin_session
 
 def get_latest_activities(number_of_activities=10):
@@ -12,7 +13,6 @@ def get_latest_activities(number_of_activities=10):
 
     return response.json()
 
-
 def get_activity_tcx_data(activity_id):
     url = f'https://connect.garmin.com/modern/proxy/download-service/export/' \
         f'tcx/activity/{activity_id}'
@@ -20,7 +20,7 @@ def get_activity_tcx_data(activity_id):
     response = garmin_session.req.get(url=url)
     _check_response(response)
 
-    return BytesIO(response.content)
+    return TCXFile(BytesIO(response.content))
 
 
 def _check_response(response):

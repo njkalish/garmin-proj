@@ -22,7 +22,29 @@ def upgrade():
             sa.Column('id', sa.Integer, primary_key=True),
             sa.Column('name', sa.String),
             sa.Column('datetime', sa.DateTime, nullable=False),
-            sa.Column('sport', sa.String)
+            sa.Column('activity_type', sa.String),
+            sa.Column('event_type', sa.String),
+            sa.Column('distance', sa.Float),
+            sa.Column('description', sa.String),
+            sa.Column('duration', sa.Float),
+            sa.Column('moving_duration', sa.Float),
+            sa.Column('elevation_gain', sa.Float),
+            sa.Column('elevation_loss', sa.Float),
+            sa.Column('average_speed', sa.Float),
+            sa.Column('max_speed', sa.Float),
+            sa.Column('calories', sa.Integer),
+            sa.Column('average_hr', sa.Integer),
+            sa.Column('max_hr', sa.Integer),
+            sa.Column('average_running_cadence', sa.Float),
+            sa.Column('max_running_cadence', sa.Integer),
+            sa.Column('steps', sa.Integer),
+            sa.Column('aerobic_training_effect', sa.Float),
+            sa.Column('anaerobic_training_effect', sa.Float),
+            sa.Column('average_stride_length', sa.Float),
+            sa.Column('vo2_max', sa.Integer),
+            sa.Column('max_vertical_speed', sa.Float),
+            sa.Column('water_estimated', sa.Integer),
+
     )
 
     op.create_table(

@@ -46,6 +46,6 @@ def prompt_credentials():
     """
     Asks the user for credentials
     """
-    email = getpass('Email: ')
+    email = getpass(' Garmin Connect Email: ')
     password = getpass('Password: ')
     return email, password

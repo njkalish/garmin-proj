@@ -4,7 +4,7 @@ from dateutil.parser import parse
 from lxml import objectify
 
 
-def none_if_error(error_types=(AttributeError, ValueError)):
+def none_if_error(error_types=(AttributeError, ValueError, TypeError)):
     def decorator(func):
         def wrapper(*args, **kwargs):
             try:

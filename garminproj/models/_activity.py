@@ -3,7 +3,7 @@ from sqlalchemy import Column, Integer, String, DateTime, Float
 from sqlalchemy.orm import relationship
 
 from ._base import Base
-from ._build import session
+from ._build import session_scope
 from ._lap import Lap
 from ._track_point import TrackPoint
 
@@ -46,11 +46,20 @@ class Activity(Base):
     )
 
     @classmethod
-    def from_garmin_json_dict(cls, json_dict, parse_tcx=True):
-        from ..connect import get_activity_tcx_data
+    def from_garmin_client(cls, number_of_activities, download_tcx=True):
+        from ..connect import get_latest_activities
 
+        json_dict = get_latest_activities(number_of_activities)
+
+        return cls.from_garmin_json_dict(
+                json_dict=json_dict,
+                download_tcx=download_tcx
+        )
+
+    @classmethod
+    def from_garmin_json_dict(cls, json_dict, download_tcx=True):
         if isinstance(json_dict, list):
-            return [cls.from_garmin_json_dict(json, parse_tcx=parse_tcx)
+            return [cls.from_garmin_json_dict(json, download_tcx=download_tcx)
                     for json in json_dict]
 
         obj = cls()
@@ -81,12 +90,14 @@ class Activity(Base):
         obj.max_vertical_speed = json_dict['maxVerticalSpeed']
         obj.water_estimated = json_dict['waterEstimated']
 
-        session.add(obj)
-        if not parse_tcx:
+        if not download_tcx:
             return obj
 
+        from ..connect import get_activity_tcx_data
         tcx = get_activity_tcx_data(obj.id)
 
+        laps = []
+        track_points = []
         for tcx_lap in tcx.activities[0].laps:
             lap = Lap(
                     activity_id=obj.id,
@@ -101,7 +112,7 @@ class Activity(Base):
                     intensity=tcx_lap.intensity,
                     trigger_method=tcx_lap.trigger_method,
             )
-            session.add(lap)
+            laps.append(lap)
 
             for track_point in tcx_lap.track_points:
                 tp = TrackPoint(
@@ -116,6 +127,11 @@ class Activity(Base):
                         latitude=track_point.latitude,
                         longitude=track_point.longitude,
                 )
-                session.add(tp)
+                track_points.append(tp)
+
+        with session_scope() as session:
+            session.add(obj)
+            session.add_all(laps)
+            session.add_all(track_points)
 
         return obj

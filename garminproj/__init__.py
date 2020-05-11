@@ -1,2 +1,2 @@
 from .config import config, db_config
-from .models import session, build_db, Activity, Lap, TrackPoint
+from .models import session_scope, build_db, Activity, Lap, TrackPoint

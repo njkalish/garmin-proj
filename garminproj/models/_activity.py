@@ -96,11 +96,8 @@ class Activity(Base):
         from ..connect import get_activity_tcx_data
         tcx = get_activity_tcx_data(obj.id)
 
-        laps = []
-        track_points = []
         for tcx_lap in tcx.activities[0].laps:
             lap = Lap(
-                    activity_id=obj.id,
                     lap_number=tcx_lap.lap_number,
                     start_time=tcx_lap.start_time,
                     lap_seconds=tcx_lap.lap_seconds,
@@ -112,12 +109,10 @@ class Activity(Base):
                     intensity=tcx_lap.intensity,
                     trigger_method=tcx_lap.trigger_method,
             )
-            laps.append(lap)
+            obj.laps.append(lap)
 
             for track_point in tcx_lap.track_points:
                 tp = TrackPoint(
-                        activity_id=obj.id,
-                        lap_id=lap.id,
                         time=track_point.time,
                         hr=track_point.hr,
                         cadence=track_point.cadence,
@@ -127,11 +122,10 @@ class Activity(Base):
                         latitude=track_point.latitude,
                         longitude=track_point.longitude,
                 )
-                track_points.append(tp)
+                lap.track_points.append(tp)
+                obj.track_points.append(tp)
 
         with session_scope() as session:
             session.add(obj)
-            session.add_all(laps)
-            session.add_all(track_points)
 
         return obj

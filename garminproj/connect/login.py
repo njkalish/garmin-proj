@@ -8,7 +8,7 @@ from requests import HTTPError
 from garminproj.connect.auth import default_credentials, prompt_credentials, \
     credential_file_path, create_credential_file
 
-def get_connect_session():
+def get_garmin_client():
     """
     General access point for getting an authenticated Garmin Connect session.
 
@@ -63,4 +63,4 @@ def get_connect_session():
             print("Error occured during Garmin Connect Client login: %s" % err)
 
 
-garmin_session = get_connect_session()
+garmin_client = get_garmin_client()

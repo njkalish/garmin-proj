@@ -5,9 +5,12 @@ Revises:
 Create Date: 2020-05-02 18:34:25.082195
 
 """
+from pathlib import Path
+
 import sqlalchemy as sa
 from alembic import op
 from sqlalchemy.exc import OperationalError
+from configparser import ConfigParser
 
 # revision identifiers, used by Alembic.
 revision = '0e75700ff095'
@@ -15,6 +18,9 @@ down_revision = None
 branch_labels = None
 depends_on = None
 
+config = ConfigParser()
+config.read('alembic.ini')
+db_dir = Path(config['alembic']['db_dir'])
 
 def upgrade():
     op.create_table(

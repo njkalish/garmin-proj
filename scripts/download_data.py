@@ -14,7 +14,6 @@ import garminproj as gp
 # the database for the first time (see alembic folder)
 gp.build_db()
 
-
 # Download a bunch of activities from Garmin. These will be added to the
 # database. If this is the first time, you will be prompted to enter your
 # credentials. These will be saved to a configured location (see config.ini).
@@ -26,9 +25,16 @@ activities = gp.Activity.from_garmin_client(
 # `activities` is a list of Activity table objects -- as many activities as
 # could be found.
 
-# Check out the first one -- these are ordered from earliest to latest.
+# Check out the first one -- these are ordered starting with most recent.
 activity = activities[0]
 
+# Print some activity descriptions
+print(
+        activity.name,
+        activity.datetime,
+        activity.description,
+        sep='\n'
+)
 
 # Access the track points associated with the activity
 track_points = activity.track_points

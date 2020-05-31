@@ -145,9 +145,9 @@ class _TCXTrackPoint:
     @property
     @none_if_error()
     def latitude(self):
-        return float(self.element.LatitudeDegrees)
+        return float(self.element.Position.LatitudeDegrees)
 
     @property
     @none_if_error()
     def longitude(self):
-        return float(self.element.LongitudeDegrees)
+        return float(self.element.Position.LongitudeDegrees)
